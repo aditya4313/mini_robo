@@ -1,0 +1,175 @@
+<?xml version="1.0"?>
+<robot name="four_wheel_car">
+
+  <link name="base_link"/>
+
+  <!-- for the Body  -->
+  <link name="body_link">
+    <inertial>
+      <mass value="5.0"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.2" ixy="0.0" ixz="0.0" iyy="0.2" iyz="0.0" izz="0.2"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <box size="0.7 0.5 0.3"/>
+      </geometry>
+      <material name="blue">
+        <color rgba="0 0 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.7 0.5 0.3"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- for the Wheels -->
+  <link name="wheel_fr">
+    <inertial>
+      <mass value="1.0"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.02" ixy="0.0" ixz="0.0" iyy="0.02" iyz="0.0" izz="0.02"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <cylinder length="0.05" radius="0.15"/>
+      </geometry>
+      <material name="red">
+        <color rgba="1 0 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.05" radius="0.15"/>
+      </geometry>
+    </collision>
+  </link>
+
+  
+
+  <!-- Additional Wheel Links -->
+
+  <link name="wheel_fl">
+    <inertial>
+      <mass value="1.0"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.02" ixy="0.0" ixz="0.0" iyy="0.02" iyz="0.0" izz="0.02"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <cylinder length="0.05" radius="0.15"/>
+      </geometry>
+      <material name="red">
+        <color rgba="1 0 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.05" radius="0.15"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="wheel_rr">
+    <inertial>
+      <mass value="1.0"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.02" ixy="0.0" ixz="0.0" iyy="0.02" iyz="0.0" izz="0.02"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <cylinder length="0.05" radius="0.15"/>
+      </geometry>
+     <material name="red">
+        <color rgba="1 0 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.05" radius="0.15"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="wheel_rl">
+    <inertial>
+      <mass value="1.0"/>
+      <origin xyz="0 0 0"/>
+      <inertia ixx="0.02" ixy="0.0" ixz="0.0" iyy="0.02" iyz="0.0" izz="0.02"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <cylinder length="0.05" radius="0.15"/>
+      </geometry>
+     <material name="red">
+        <color rgba="1 0 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.05" radius="0.15"/>
+      </geometry>
+    </collision>
+  </link>
+  
+  <!-- for the Joints  -->
+  <joint name="joint_fr" type="continuous">
+    <parent link="base_link"/>
+    <child link="wheel_fr"/>
+    <origin xyz = "0.3 -0.275 0.15" rpy="${pi/2} 0 0"/>
+        <axis xyz = "0 0 -1"/>
+  </joint>
+
+  <!-- some additional Joints -->  
+  <joint name="joint_fl" type="continuous">
+    <parent link="base_link"/>
+    <child link="wheel_fl"/>
+    <origin xyz = "0.3 0.275 0.15" rpy="-${pi/2} 0 0"/>
+        <axis xyz = "0 0 1"/>
+  </joint>
+
+  <joint name="body_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="body_link"/>
+    <origin xyz = "0 0 0.3" rpy="0 0 0"/>
+        <axis xyz = "0 0 0"/>
+  </joint>
+
+  <joint name="joint_rr" type="continuous">
+    <parent link="base_link"/>
+    <child link="wheel_rr"/>
+    <origin xyz = "-0.3 -0.275 0.15" rpy="${pi/2} 0 0"/>
+        <axis xyz = "0 0 -1"/>
+  </joint>
+
+  <joint name="joint_rl" type="continuous">
+    <parent link="base_link"/>
+    <child link="wheel_rl"/>
+    <origin xyz = "-0.3 0.275 0.15" rpy="-${pi/2} 0 0"/>
+        <axis xyz = "0 0 1"/>
+  </joint>
+
+<!-- Gazebo -->
+    <gazebo reference = "wheel_rl">
+        <material> Gazebo/Blue </material>
+    </gazebo>
+
+    <gazebo reference = "wheel_fr">
+        <material> Gazebo/Blue </material>
+    </gazebo>
+
+    <gazebo reference = "wheel_fl">
+        <material> Gazebo/Blue </material>
+    </gazebo>
+
+    <gazebo reference = "wheel_rr">
+        <material> Gazebo/Blue </material>
+    </gazebo>
+
+    <gazebo reference = "body_link">
+        <material> Gazebo/Red </material>
+    </gazebo>
+
+</robot>
